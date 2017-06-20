@@ -1,6 +1,15 @@
 'use strict'
 
 /* 
+ * In JavaScript, inheritance is implemented with prototyping.
+ * 
+ * Every object can have a reference to its prototype.
+ * The object's prototype property is an internal property
+ * that's not directly accessible.
+ * 
+ * Every object can have a prototype, and an object's prototype
+ * can also have a prototype, and so on, forming a prototype chain.
+ * 
  * 1. a function, when created, gets a new object
  *    that's assigned to its prototype property
  * 

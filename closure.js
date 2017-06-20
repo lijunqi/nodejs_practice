@@ -28,3 +28,22 @@ var ninja2 = new Ninja();
 if (ninja2.getFeints() === 0) {
     console.log('The second ninja object gets its own feints variable.');
 }
+
+
+var fibonacci = function () {
+	var memo = [0, 1];
+  var fib = function (n) {
+  	console.log('memo size = ', memo.length);
+    var result = memo[n];
+    if (typeof result !== 'number') {
+    	result = fib(n - 1) + fib(n - 2);
+      memo[n] = result;
+    }
+    return result;
+  }
+  return fib;
+};
+
+
+var fn = fibonacci();
+console.log(fn(10));
