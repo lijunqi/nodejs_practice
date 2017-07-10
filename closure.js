@@ -1,5 +1,26 @@
 'use strict'
 
+// example
+var outerValue = 'samurai';
+var later;
+function outerFunction() {
+    var innerValue = 'ninja';
+    function innerFunction() {
+        if (outerValue === 'samurai'){
+            console.log('I can see the samurai.');
+        }
+        if (innerValue === 'ninja') {
+            console.log('I can see the ninja.');
+        }
+    }
+
+    later = innerFunction;
+}
+outerFunction();
+later();
+
+// example
+
 function Ninja() {
     var feints = 0;
     this.getFeints = function() {
