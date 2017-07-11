@@ -21,13 +21,15 @@ later();
 
 // example
 
+// Mimicking private member
+// ninja1.feints is undefined
 function Ninja() {
     var feints = 0;
-    this.getFeints = function() {
+    this.getFeints = function() { // getter
         return feints;
     };
 
-    this.feint = function() {
+    this.feint = function() { // setter
         feints++;
     };
 }
