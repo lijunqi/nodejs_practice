@@ -55,7 +55,7 @@ if (ninja2.getFeints() === 0) {
 }
 
 
-console.log('*** memorize ***');
+console.log('****** memorize ******');
 var fibonacci = function () {
     var memo = [0, 1];
     var fib = function (n) {
@@ -73,3 +73,38 @@ var fibonacci = function () {
 
 var fn = fibonacci();
 console.log(fn(10));
+
+
+console.log('****** Creating closures in loops: A common mistake ******');
+/* 
+ * The reason is that the functions assigned to getHelp are closures;
+ * they consist of the function definition and
+ * the captured environment from the setupHelp function's scope.
+ * !!! Three closures have been created by the loop,
+ * !!! but each one shares the same single lexical environment,
+ * which has a variable with changing values (item.help).
+ * The value of item.help is determined when the getHelp are executed.
+ * Because the loop has already run its course by that time,
+ * the item variable object (shared by all three closures)
+ * has been left pointing to the last entry in the helpText list.
+ */
+var getHelp = {};
+function setupHelp() {
+  var helpText = [
+      {'id': 'email', 'help': 'Your e-mail address'},
+      {'id': 'name', 'help': 'Your full name'},
+      {'id': 'age', 'help': 'Your age (you must be over 16)'}
+    ];
+
+  for (var i = 0; i < helpText.length; i++) {
+    let item = helpText[i]; // if use var, all results is 'age'
+    getHelp[item.id] = function() {
+      console.log(`${item.id} help message: ${item.help}`);
+    }
+  }
+}
+
+setupHelp();
+getHelp['email']();
+getHelp['name']();
+getHelp['age']();
