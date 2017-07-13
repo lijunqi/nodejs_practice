@@ -1,5 +1,27 @@
 'use strict'
 
+/*
+ * A closure is the combination of a function
+ * and the lexical environment
+ * within which that function was declared.
+ */
+
+
+/*
+ * This is an example of lexical scoping,
+ * which describes how a parser resolves variable names
+ * when functions are nested
+ */
+console.log('****** lexical scoping ******');
+function init() {
+    var name = 'Mozilla'; // name is a local variable created by init
+    function displayName() { // displayName() is the inner function, a closure
+        console.log('name: ', name); // use variable declared in the parent function    
+    }
+    displayName();
+}
+init();
+
 // example
 console.log('****** closure ******');
 var outerValue = 'samurai';
