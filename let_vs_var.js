@@ -53,3 +53,47 @@ let me = 'foo';
 
 var you = 'foo';
 var you = 'bar'; // No problem, `me` is replaced.
+
+
+/************** Emulating private memebers **************/
+/*
+ * This technique only provides "static" private state
+ * in the example, all instances of SomeConstructor will
+ * share the same privateScope.
+ */
+console.log('****** Emulating private memebers ******');
+var SomeConstructor;
+{
+  let privateScope = {}; // static private member
+
+  SomeConstructor = function SomeConstructor() {
+    this.someProperty = 'foo';
+    privateScope.hiddenProperty = 'bar';
+  }
+
+  SomeConstructor.prototype.showPublic = function() {
+    console.log('public property: ', this.someProperty); // foo
+  }
+
+  SomeConstructor.prototype.showPrivate = function() {
+    console.log('private property:', privateScope.hiddenProperty); // bar
+  }
+
+  SomeConstructor.prototype.setPublic = function (val) {
+    this.someProperty = val;
+  }
+}
+
+var myInstance = new SomeConstructor();
+
+myInstance.showPublic();
+myInstance.showPrivate();
+
+myInstance.setPublic('luna');
+myInstance.showPublic();
+
+var yourInst = new SomeConstructor();
+yourInst.showPublic();
+yourInst.showPrivate();
+
+// console.log(privateScope.hiddenProperty); // error

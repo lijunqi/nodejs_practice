@@ -1,6 +1,7 @@
 'use strict'
 
 // example
+console.log('****** closure ******');
 var outerValue = 'samurai';
 var later;
 function outerFunction() {
@@ -23,6 +24,7 @@ later();
 
 // Mimicking private member
 // ninja1.feints is undefined
+console.log('****** Mimicking private member ******');
 function Ninja() {
     var feints = 0;
     this.getFeints = function() { // getter
@@ -53,18 +55,19 @@ if (ninja2.getFeints() === 0) {
 }
 
 
+console.log('*** memorize ***');
 var fibonacci = function () {
-	var memo = [0, 1];
-  var fib = function (n) {
-  	console.log('memo size = ', memo.length);
-    var result = memo[n];
-    if (typeof result !== 'number') {
-    	result = fib(n - 1) + fib(n - 2);
-      memo[n] = result;
+    var memo = [0, 1];
+    var fib = function (n) {
+        console.log('memo size = ', memo.length);
+        var result = memo[n];
+        if (typeof result !== 'number') {
+            result = fib(n - 1) + fib(n - 2);
+            memo[n] = result;
+        }
+        return result;
     }
-    return result;
-  }
-  return fib;
+    return fib;
 };
 
 
